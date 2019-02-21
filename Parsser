@@ -1,0 +1,36 @@
+import codecs
+
+f1 = open("Sobo.txt", "r")
+f2 = open("Decodat.txt", "a")
+string1 = ""
+string2 = ""
+ora = 0
+l = [" "]
+ora2 = -1
+while l != []:
+    op = 0
+    s =  f1.readline()
+    l = list(s)
+    if l != []:
+        ora = ora * 10 + int(l[11])
+        ora = ora * 10 + int(l[12])
+        ora = ora * 10 + int(l[14])
+        ora = ora * 10 + int(l[15])
+    if ora != ora2 and ora != 0:
+        f2.write("\n")
+        f2.write(str(ora) + " : ")
+        ora2 = ora
+    ora = 0
+    if '\'' in l:
+        string1 += (l[25])
+    else:
+        s = codecs.decode(string1,'rot_13')
+        f2.write(s)
+        s = ""
+        string1 = ""
+        for i in range (28,len(l)-1):
+           string2 += l[i]
+        op = 1
+    if op == 1:
+        f2.write(" " + string2 + " ")
+        string2 = ""
